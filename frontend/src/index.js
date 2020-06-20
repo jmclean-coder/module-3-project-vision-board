@@ -409,7 +409,7 @@ function createOrEditGoal() {
         },
         body: JSON.stringify(data)
       })
-      .then(response => response.json())
+      .then(response => console.log(response.json()))
       .then(function(json) {
         fetchBoard(data.board_id)
       })
@@ -583,7 +583,7 @@ function logoutUser(navbarUsername) {
   location.reload()
 }
 
-function buildBoardsList(boards) {
+function buildBoardsList(boards) { // Refactor WIP 
   if (boards.length > 1){ 
   for(board of boards){
     const item = document.createElement("li")
@@ -593,7 +593,7 @@ function buildBoardsList(boards) {
       fetchBoard(event.target.parentElement.getAttribute("board-id"))
     })
     boardsList.appendChild(item)
-    debugger;
+  
     }
   } else {
     const item = document.createElement("li")
@@ -605,8 +605,7 @@ function buildBoardsList(boards) {
     })
     if(!boardsList.contains(item)){
     boardsList.appendChild(item)
-    debugger;
-  }
+    }
   }
 }
 
