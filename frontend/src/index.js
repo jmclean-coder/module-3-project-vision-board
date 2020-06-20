@@ -252,9 +252,11 @@ function createEditBoard(event) {
         if (json.errors) {
           // build error message from server for rendering
           buildErrorMsg(json)
-        } else if (json.data.id) {
+        } else if (json.data) {
+          console.log(json.data)
           event.target.form.remove();
           buildBoardCard(json.data);
+          buildBoardsList(json.data)
         }
       });
   }
@@ -283,6 +285,8 @@ function deleteBoard(boardId) {
         if (json.data.id) {
           // Delete board from DOM
           document.querySelector("#board-card").remove()
+          //Delete Board from boards list
+         boardsList.querySelector(`li[board-id="${boardId}"]`).remove()
           // Update user data now that board has been deleted
           await fetchUser(window.user.attributes.email)
           if (window.user.attributes.boards.length > 0) {
@@ -580,6 +584,7 @@ function logoutUser(navbarUsername) {
 }
 
 function buildBoardsList(boards) {
+  if (boards.length > 1){ 
   for(board of boards){
     const item = document.createElement("li")
     item.innerHTML = `<a>○${board.title}</a>`
@@ -588,6 +593,20 @@ function buildBoardsList(boards) {
       fetchBoard(event.target.parentElement.getAttribute("board-id"))
     })
     boardsList.appendChild(item)
+    debugger;
+    }
+  } else {
+    const item = document.createElement("li")
+    item.innerHTML = `<a>○${boards.attributes.title}</a>`
+    console.log(boards)
+    item.setAttribute(`board-id`, boards.id)
+    item.addEventListener("click", function(event) {
+      fetchBoard(event.target.parentElement.getAttribute("board-id"))
+    })
+    if(!boardsList.contains(item)){
+    boardsList.appendChild(item)
+    debugger;
+  }
   }
 }
 
