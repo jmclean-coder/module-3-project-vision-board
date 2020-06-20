@@ -409,16 +409,21 @@ function createOrEditGoal() {
         },
         body: JSON.stringify(data)
       })
-      .then(response => console.log(response.json()))
+      .then(response => response.json())
       .then(function(json) {
+        if (json.errors){
+          buildErrorMsg(json)
+        } else {
         fetchBoard(data.board_id)
+        document.getElementById("new-goal").reset()
+        goalFormLabel.innerHTML = `<strong>Create New Goal</strong>`
+        statusInput.value = "-- Select a Status --"
+        newGoalForm.hidden = true
+        submitButton.value = "Submit"
+        }  
       })
   }
-    document.getElementById("new-goal").reset()
-    goalFormLabel.innerHTML = `<strong>Create New Goal</strong>`
-    statusInput.value = "-- Select a Status --"
-    newGoalForm.hidden = true
-    submitButton.value = "Submit"
+  
   });
 }
 
