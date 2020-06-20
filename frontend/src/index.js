@@ -561,8 +561,8 @@ fetch(currentUserUrl)
 loginBtn.style.display = "none"
 newBoardBtn.style.display = "inline-block"
 logoutBtn.style.display = "inline-block"
-logoutBtn.addEventListener("click", () => {logoutUser(navbarUsername)}
-)
+newBoardBtn.addEventListener("click", () => buildBoardForm())
+logoutBtn.addEventListener("click", () => {logoutUser(navbarUsername)})
 const navbarUsername = document.createElement("li")
 navbarUsername.style.float="right"
 navbarUsername.innerHTML = `<a>Logged in as: ${currentUser.attributes.first_name}</a>`
