@@ -570,18 +570,13 @@ menuList.replaceChild(navbarUsername, signupBtn)
 }
 
 function logoutUser(navbarUsername) {
-  // Remove board and board form from DOM
-  if (document.getElementById("board-form")) {document.getElementById("board-form").remove()}
-  document.getElementById("board-card").remove()
-
   document.querySelector(".home-page-text").hidden = false
-  
   newBoardBtn.style.display = "none"
   logoutBtn.style.display = "none" 
   loginBtn.style.display = "inline-block"
-
   menuList.replaceChild(signupBtn, navbarUsername)
   window.user = ""
+  location.reload()
 }
 
 function buildBoardsList(boards) {

@@ -29968,3 +29968,216 @@ Completed 200 OK in 9ms (Views: 2.9ms | ActiveRecord: 0.5ms | Allocations: 2385)
 
 
 >>>>>>> e5b727adaf305fd061ced67a3dc301d1b747c418
+Started POST "/login" for ::1 at 2020-06-20 01:02:58 -0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as JSON
+  Parameters: {"email"=>"mcleajos000@gmail.com", "user"=>{"email"=>"mcleajos000@gmail.com"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mcleajos000@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `login'
+  [1m[36mBoard Load (0.5ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:29:in `login'
+Completed 200 OK in 22ms (Views: 11.9ms | ActiveRecord: 2.0ms | Allocations: 9732)
+
+
+Started GET "/users/127" for ::1 at 2020-06-20 01:02:58 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"127"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 127], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `show'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 1828)
+
+
+Started POST "/boards" for ::1 at 2020-06-20 01:03:05 -0700
+Processing by BoardsController#create as JSON
+  Parameters: {"title"=>"Test", "category"=>"Career", "background"=>"black_board.jpg", "user_id"=>"127", "board"=>{"title"=>"Test", "category"=>"Career", "user_id"=>"127", "background"=>"black_board.jpg"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/boards_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 127], ["LIMIT", 1]]
+  ↳ app/controllers/boards_controller.rb:9:in `create'
+  [1m[36mBoard Create (1.6ms)[0m  [1m[32mINSERT INTO "boards" ("title", "category", "user_id", "created_at", "updated_at", "background") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Test"], ["category", "Career"], ["user_id", 127], ["created_at", "2020-06-20 08:03:05.689273"], ["updated_at", "2020-06-20 08:03:05.689273"], ["background", "black_board.jpg"]]
+  ↳ app/controllers/boards_controller.rb:9:in `create'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/boards_controller.rb:9:in `create'
+  [1m[36mGoal Load (0.4ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."board_id" = ?[0m  [["board_id", 253]]
+  ↳ app/controllers/boards_controller.rb:11:in `create'
+Completed 200 OK in 26ms (Views: 4.9ms | ActiveRecord: 4.0ms | Allocations: 11563)
+
+
+Started POST "/goals" for ::1 at 2020-06-20 01:03:11 -0700
+Processing by GoalsController#create as */*
+  Parameters: {"board_id"=>"253", "title"=>"rrr", "content"=>"r", "status"=>"Not Started", "goal"=>{"title"=>"rrr", "content"=>"r", "status"=>"Not Started", "board_id"=>"253"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/goals_controller.rb:14:in `create'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:14:in `create'
+  [1m[36mGoal Create (1.3ms)[0m  [1m[32mINSERT INTO "goals" ("title", "content", "status", "board_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "rrr"], ["content", "r"], ["status", "Not Started"], ["board_id", 253], ["created_at", "2020-06-20 08:03:11.415181"], ["updated_at", "2020-06-20 08:03:11.415181"]]
+  ↳ app/controllers/goals_controller.rb:14:in `create'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/goals_controller.rb:14:in `create'
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 8779)
+
+
+Started GET "/boards/253" for ::1 at 2020-06-20 01:03:11 -0700
+Processing by BoardsController#show as */*
+  Parameters: {"id"=>"253"}
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/boards_controller.rb:4:in `show'
+  [1m[36mGoal Load (0.1ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."board_id" = ?[0m  [["board_id", 253]]
+  ↳ app/controllers/boards_controller.rb:5:in `show'
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.2ms | Allocations: 2075)
+
+
+Started PATCH "/goals/1029" for ::1 at 2020-06-20 01:03:15 -0700
+Processing by GoalsController#update as */*
+  Parameters: {"board_id"=>"253", "title"=>"rrr", "content"=>"r", "status"=>"Not Started", "id"=>"1029", "goal"=>{"title"=>"rrr", "content"=>"r", "status"=>"Not Started", "board_id"=>"253"}}
+  [1m[36mGoal Load (0.2ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."id" = ? LIMIT ?[0m  [["id", 1029], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:23:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 3888)
+
+
+Started PATCH "/goals/1029" for ::1 at 2020-06-20 01:03:21 -0700
+Processing by GoalsController#update as */*
+  Parameters: {"board_id"=>"253", "title"=>"rrrr", "content"=>"r", "status"=>"Not Started", "id"=>"1029", "goal"=>{"title"=>"rrrr", "content"=>"r", "status"=>"Not Started", "board_id"=>"253"}}
+  [1m[36mGoal Load (0.2ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."id" = ? LIMIT ?[0m  [["id", 1029], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:23:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mGoal Update (0.4ms)[0m  [1m[33mUPDATE "goals" SET "title" = ?, "updated_at" = ? WHERE "goals"."id" = ?[0m  [["title", "rrrr"], ["updated_at", "2020-06-20 08:03:21.697222"], ["id", 1029]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 1.3ms | Allocations: 4585)
+
+
+Started PATCH "/goals/1029" for ::1 at 2020-06-20 01:03:26 -0700
+Processing by GoalsController#update as */*
+  Parameters: {"board_id"=>"253", "title"=>"", "content"=>"r", "status"=>"Not Started", "id"=>"1029", "goal"=>{"title"=>"", "content"=>"r", "status"=>"Not Started", "board_id"=>"253"}}
+  [1m[36mGoal Load (0.2ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."id" = ? LIMIT ?[0m  [["id", 1029], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:23:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+Completed 204 No Content in 144ms (ActiveRecord: 0.5ms | Allocations: 184867)
+
+
+Started PATCH "/goals/1029" for ::1 at 2020-06-20 01:03:33 -0700
+Processing by GoalsController#update as */*
+  Parameters: {"board_id"=>"253", "title"=>"rrr", "content"=>"r", "status"=>"Not Started", "id"=>"1029", "goal"=>{"title"=>"rrr", "content"=>"r", "status"=>"Not Started", "board_id"=>"253"}}
+  [1m[36mGoal Load (0.2ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."id" = ? LIMIT ?[0m  [["id", 1029], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:23:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[36mGoal Update (0.4ms)[0m  [1m[33mUPDATE "goals" SET "title" = ?, "updated_at" = ? WHERE "goals"."id" = ?[0m  [["title", "rrr"], ["updated_at", "2020-06-20 08:03:33.642714"], ["id", 1029]]
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/goals_controller.rb:24:in `update'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 4535)
+
+
+Started POST "/login" for ::1 at 2020-06-20 01:04:26 -0700
+Processing by UsersController#login as JSON
+  Parameters: {"email"=>"mcleajos000@gmail.com", "user"=>{"email"=>"mcleajos000@gmail.com"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mcleajos000@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `login'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:29:in `login'
+Completed 200 OK in 8ms (Views: 2.9ms | ActiveRecord: 0.5ms | Allocations: 2125)
+
+
+Started GET "/boards/253" for ::1 at 2020-06-20 01:04:26 -0700
+Processing by BoardsController#show as */*
+  Parameters: {"id"=>"253"}
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+Started GET "/users/127" for ::1 at 2020-06-20 01:04:26 -0700
+  ↳ app/controllers/boards_controller.rb:4:in `show'
+  [1m[36mGoal Load (0.1ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."board_id" = ?[0m  [["board_id", 253]]
+  ↳ app/controllers/boards_controller.rb:5:in `show'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.2ms | Allocations: 2150)
+
+
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"127"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 127], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9:in `show'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.3ms | Allocations: 1901)
+
+
+Started POST "/login" for ::1 at 2020-06-20 01:04:31 -0700
+Processing by UsersController#login as JSON
+  Parameters: {"email"=>"mcleajos000@gmail.com", "user"=>{"email"=>"mcleajos000@gmail.com"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mcleajos000@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `login'
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:29:in `login'
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms | Allocations: 2142)
+
+
+Started GET "/boards/253" for ::1 at 2020-06-20 01:04:31 -0700
+Started GET "/users/127" for ::1 at 2020-06-20 01:04:31 -0700
+Processing by BoardsController#show as */*
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"253"}
+  Parameters: {"id"=>"127"}
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 127], ["LIMIT", 1]]
+  ↳ app/controllers/boards_controller.rb:4:in `show'
+  ↳ app/controllers/users_controller.rb:9:in `show'
+  [1m[36mGoal Load (0.2ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."board_id" = ?[0m  [["board_id", 253]]
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/boards_controller.rb:5:in `show'
+  ↳ app/controllers/users_controller.rb:10:in `show'
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 0.3ms | Allocations: 3560)
+
+
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.2ms | Allocations: 3755)
+
+
+Started POST "/login" for ::1 at 2020-06-20 01:04:36 -0700
+Processing by UsersController#login as JSON
+  Parameters: {"email"=>"mcleajos000@gmail.com", "user"=>{"email"=>"mcleajos000@gmail.com"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mcleajos000@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `login'
+  [1m[36mBoard Load (0.2ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/users_controller.rb:29:in `login'
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 2123)
+
+
+Started GET "/boards/253" for ::1 at 2020-06-20 01:04:36 -0700
+Started GET "/users/127" for ::1 at 2020-06-20 01:04:36 -0700
+Processing by BoardsController#show as */*
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"253"}
+  Parameters: {"id"=>"127"}
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT ?[0m  [["id", 253], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 127], ["LIMIT", 1]]
+  ↳ app/controllers/boards_controller.rb:4:in `show'
+  ↳ app/controllers/users_controller.rb:9:in `show'
+  [1m[36mGoal Load (0.1ms)[0m  [1m[34mSELECT "goals".* FROM "goals" WHERE "goals"."board_id" = ?[0m  [["board_id", 253]]
+  [1m[36mBoard Load (0.1ms)[0m  [1m[34mSELECT "boards".* FROM "boards" WHERE "boards"."user_id" = ?[0m  [["user_id", 127]]
+  ↳ app/controllers/boards_controller.rb:5:in `show'
+  ↳ app/controllers/users_controller.rb:10:in `show'
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.2ms | Allocations: 3522)
+
+
+Completed 200 OK in 5ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 3735)
+
+
