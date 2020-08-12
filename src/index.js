@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = "https://module-3-vision-board-backend.herokuapp.com"
+// const BASE_URL = "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const BOARDS_URL = `${BASE_URL}/boards`
 const GOALS_URL = `${BASE_URL}/goals`
@@ -95,7 +96,7 @@ async function fetchUser(email) {
       } else {
         loginForm.reset();
         loginFormDiv.style.display = "none";
-        window.user = json.data;
+        localStorage.user = JSON.stringify(json.data);
       }
     });
 }
@@ -132,13 +133,13 @@ async function loginUser(email) {
 function renderUser() {
   document.querySelector(".home-page-text").hidden = true
   // Generate first board if it exists
-  if (window.user.attributes.boards.length > 0) {
-    fetchBoard(window.user.attributes.boards[0].id);
+  if (JSON.parse(localStorage.user).attributes.boards.length > 0) {
+    fetchBoard(JSON.parse(localStorage.user).attributes.boards[0].id);
   } else {
     buildBoardForm();
   }
   // Update nav bar
-  changeNavbar(window.user);
+  changeNavbar(JSON.parse(localStorage.user));
 }
 
 function confirmUserSignup() {
@@ -158,7 +159,7 @@ function confirmUserSignup() {
 }
 
 function changeNavbar(currentUser){
-let currentUserUrl = `http://localhost:3000/users/${window.user.id}`
+let currentUserUrl = `http://localhost:3000/users/${JSON.parse(localStorage.user).id}`
 
 fetch(currentUserUrl)
 .then(resp => resp.json())
@@ -187,7 +188,7 @@ function logoutUser(navbarUsername) {
   loginBtn.style.display = "inline-block"
 
   menuList.replaceChild(signupBtn, navbarUsername)
-  window.user = ""
+  delete localStorage.user
   location.reload()
 }
 
@@ -226,6 +227,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeForm() {
     loginFormDiv.style.display = "";
     signupFormDiv.style.display = "";
+  }
+
+  // Auto login user
+  if (localStorage.user) {
+    renderUser()
   }
   /////////////////////////
   // User Functions: End //

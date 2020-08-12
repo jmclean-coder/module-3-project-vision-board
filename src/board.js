@@ -212,7 +212,7 @@ function createEditBoard(event) {
   } else {
     // Create new board fetch request
     options.method = "POST";
-    body.user_id = window.user.id;
+    body.user_id = JSON.parse(localStorage.user).id;
     options.body = JSON.stringify(body);
     fetch(BOARDS_URL, options)
       .then((resp) => resp.json())
@@ -252,9 +252,9 @@ function deleteBoard(boardId) {
           // Delete board from DOM
           document.querySelector("#board-card").remove()
           // Update user data now that board has been deleted
-          await fetchUser(window.user.attributes.email)
-          if (window.user.attributes.boards.length > 0) {
-            fetchBoard(window.user.attributes.boards[0].id);
+          await fetchUser(JSON.parse(localStorage.user).attributes.email)
+          if (JSON.parse(localStorage.user).attributes.boards.length > 0) {
+            fetchBoard(JSON.parse(localStorage.user).attributes.boards[0].id);
           } else {
             buildBoardForm();
           }
