@@ -21,12 +21,11 @@ This project was designed to enable a user to create, edit, and delete vision bo
 ![Alt text](https://github.com/mathewpwheatley/module-3-project-vision-board/raw/master/ReadmeImg/NewGoal.png)
 
 * View all boards and related goals
-![Board With Goals Screen](ReadmeImg/BoardWithGoals.png)
 
 ![Alt text](https://github.com/mathewpwheatley/module-3-project-vision-board/raw/master/ReadmeImg/BoardWithGoals.png)
 
 
-The backend of the application leverages Ruby on Rails API functionality to receive and send AJAX requests in a JSON formate. The interactive frontend is build on vanilla HTML and Javascript.
+The interactive frontend of this application is built on vanilla HTML and Javascript. The backend leverages Ruby on Rails API functionality to receive and send AJAX requests in a JSON format.
 
 # Team:
 * Colton Kaiser
@@ -35,16 +34,21 @@ The backend of the application leverages Ruby on Rails API functionality to rece
 * Mathew Wheatley
 
 # Dependencies:
-Ruby (2.6.1)
-Bundler (2.1.4)
-Rails (6.0.3.1)
-Google Chrome (80.0.3987.149)
+* Node Package Manager (NPM)
+* local-web-server
+* Google Chrome (80.0.3987.149)
 
 # Installation:
-Download this entire git repository to your computer and place in your desired install directory. If you don't have the above dependencies, in your terminal run ``ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`` to install Homebrew, then run ``brew install rbenv ruby-build`` to install Ruby, then ``rbenv install 2.7.1`` ``rbenv global 2.7.1`` and ``ruby -v`` to confirm. Finally, to install Rails, run ``gem install rails -v 6.0.2.2`` ``rbenv rehash`` and ``rails -v`` to confirm. Now, via a terminal interface navigate to install_directory/backend. From this location execute ``bundle install`` to install all other required ruby gems. This should allow you to explore all functionality of the application.
+Download this entire git repository to your computer and place in your desired install directory.
+If you do not currently have Node Package Manager (NPM) and you'd like to view this app locally (not on the hosted site), make sure to install it before moving forward. You can follow their guide here: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm. After installation, in your terminal run `npm install -g local-web-server` to install local-web-server, which you'll need to run the app locally.
 
 # Running:
-This project was designed as a proof of concept so it requires hosting locally. To start hosting the local server navigate to install_directory/backend via a terminal interface and then execute rails s. Next, from your Google Chrome browser navigate to your install_directory/frontend/index.html. At this point the application will load and all functionality will be available.
+This project is hosted on Github Pages here: https://ckaiser258.github.io/VisionBoard/. If you'd like to view it locally:
+1. Make sure you've installed the backend repo for this application (located here: https://github.com/ckaiser258/visionboard-backend) and have followed the installation/running instructions.
+2. In your terminal, run `ws`to start up the local web server.
+3. Next, from your Google Chrome browser navigate to localhost:8000. At this point the front end of the application will load.
+
+NOTE: If you're planning on making changes to the backend repo and/or using it instead of the hosted backend: Open this repo in your text editor and comment out line 1 of index.js, then comment IN line 2.
 
 # License:
 

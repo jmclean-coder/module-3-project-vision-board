@@ -1,3 +1,5 @@
+import {newGoalForm} from './index.js'
+
 const statusInput = document.getElementById("status")
 statusInput.style.margin = "25px"
 const submitButton = document.getElementById("submit-button")
@@ -61,7 +63,7 @@ function createGoalCard(goal) {
   })
 }
 
-function createOrEditGoal() {
+export function createOrEditGoal() {
   newGoalForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const goal = {

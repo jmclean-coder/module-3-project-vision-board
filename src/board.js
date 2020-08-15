@@ -1,4 +1,6 @@
-function fetchBoard(boardId) {
+import { BOARDS_URL, newGoalForm } from "./index.js";
+
+export function fetchBoard(boardId) {
   fetch(BOARDS_URL + "/" + boardId)
     .then((resp) => resp.json())
     .then((json) => buildBoardCard(json.data));
@@ -75,7 +77,7 @@ function buildBoardCard(board) {
   });
 }
 
-function buildBoardForm(boardId) {
+export function buildBoardForm(boardId) {
   // Create form
   const boardForm = document.createElement("form");
   boardForm.id = "board-form";
@@ -208,7 +210,7 @@ function createEditBoard(event) {
           event.target.form.remove();
           buildBoardCard(json.data);
         }
-      });
+      }).then(location.reload());
   } else {
     // Create new board fetch request
     options.method = "POST";
